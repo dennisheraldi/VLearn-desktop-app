@@ -1,4 +1,7 @@
-venv
+venv*
 ui
 __pycache__
 db
+*.egg-info
+.coverage
+htmlcov
