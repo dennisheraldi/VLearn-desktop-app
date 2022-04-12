@@ -29,7 +29,7 @@ ignore-paths=
 # Files or directories matching the regex patterns are skipped. The regex
 # matches against base names, not paths. The default value ignores emacs file
 # locks
-ignore-patterns=^\.#|__init__.py
+ignore-patterns=^\.#
 
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
@@ -93,7 +93,9 @@ disable=raw-checker-failed,
         use-symbolic-message-instead,
         c-extension-no-member,
         unused-argument,
-        consider-using-f-string
+        consider-using-f-string,
+        too-few-public-methods,
+        no-name-in-module
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option

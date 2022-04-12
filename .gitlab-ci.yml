@@ -27,16 +27,18 @@ cache:
     - venv/
 
 before_script:
+  - apt-get update
+  - apt-get install ffmpeg libsm6 libxext6  -y
   - python --version
   - pip install virtualenv
   - virtualenv venv
   - source venv/bin/activate
   - pip install -e .
-  - pip install -r requirements-ci.txt
 
 lint-and-coverage:
   stage: test
   script:
+    - pip install -r requirements-ci.txt
     - isort tests src -c
     - pylint vlearn
     - coverage run -m pytest tests

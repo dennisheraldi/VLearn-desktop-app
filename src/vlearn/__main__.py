@@ -1,6 +1,11 @@
+"""Main driver for application client module.
+"""
+
 import os
-from database import Database
-from views.display import DisplayManager
+
+from vlearn.database import Database
+# from vlearn.views.display import DisplayManager
+from vlearn.models.course import Course
 
 if __name__ == '__main__':
     # Dapatkan direktori sekarang
@@ -14,6 +19,9 @@ if __name__ == '__main__':
         os.makedirs('db')
     # Buat koneksi ke database
     Database.create_connection(database_path)
-    print("Hello")
+    # Buat tabel jika belum ada
+    for x in [Course]:
+        Database.create_table(x.CREATE_QUERY)
+    print('Hello')
     # Tampilan menu utama
     # DisplayManager()

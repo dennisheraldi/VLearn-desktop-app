@@ -1,7 +1,9 @@
+"""Module for static database methods."""
 from PyQt5 import QtSql
 
-class Database(object):
 
+class Database:
+    """Class for static database methods."""
     @staticmethod
     def create_connection(db_file):
         """Buat koneksi ke database SQLite.
@@ -13,10 +15,7 @@ class Database(object):
         db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
         db.setDatabaseName(db_file)
 
-        if not db.open():
-            # Terjadi error dalam mengakses database
-            print("Error ketika membuka database!")
-            exit()
+        return db.open()
 
     @staticmethod
     def create_table(create_table_sql):
@@ -25,8 +24,13 @@ class Database(object):
         Args:
             create_table_sql ([type]): SQL Query untuk membuat tabel
         """
-        try:
-            c = QtSql.QSqlQuery()
-            c.exec(create_table_sql)
-        except QtSql.QSqlError as e:
-            print(e)
+        query = QtSql.QSqlQuery()
+        query.exec(create_table_sql)
+        return query.lastError() is None
+
+
+    @staticmethod
+    def close_connection():
+        """Tutup koneksi ke database"""
+        db = QtSql.QSqlDatabase.database()
+        db.close()

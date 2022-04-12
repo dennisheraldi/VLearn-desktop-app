@@ -1,8 +1,11 @@
-from PyQt5 import QtWidgets
+"""Module for display base class and manager."""
 import sys
 
+from PyQt5 import QtWidgets
 
-class DisplayManager(object):
+
+class DisplayManager:
+    """Display manager."""
     __instance = None
 
     @staticmethod
@@ -22,7 +25,7 @@ class DisplayManager(object):
         if DisplayManager.__instance is None:
             DisplayManager.__instance = self
         # Import semua views
-        
+
         # Buat instance QApplication baru
         self.app = QtWidgets.QApplication(sys.argv)
         # Register semua fungsi pembuat window beserta routenya
@@ -119,13 +122,20 @@ class DisplayManager(object):
             ok_call: Fungsi/lambda yang akan dipanggil ketika tombol Ok ditekan
             info (str): Pesan tambahan yang ditampilkan ke messagebox
         """
-        msg = DisplayManager.get_message_box(QtWidgets.QMessageBox.Information, title, message, info)
+        msg = DisplayManager.get_message_box(
+            QtWidgets.QMessageBox.Information,
+            title,
+            message,
+            info,
+        )
         if msg.exec() == QtWidgets.QMessageBox.Ok and ok_call is not None:
             ok_call()
 
 
 class AppDisplay(QtWidgets.QMainWindow):
-    def __init__(self, ui: object):
+    """Base class for every views.
+    """
+    def __init__(self, user_interface: object):
         """
         Buat View baru untuk diregister ke UIManager
 
@@ -133,7 +143,7 @@ class AppDisplay(QtWidgets.QMainWindow):
             ui: Kode python UI QtDesigner yang digenerate dari pyuic5 (.ui)
         """
         super().__init__()
-        self.window = ui()
+        self.window = user_interface()
         self.window.setupUi(self)
-        self.setWindowTitle(f"{self.windowTitle()} - VLearn")
+        self.setWindowTitle(f'{self.windowTitle()} - VLearn')
         self.setFixedSize(self.size())
