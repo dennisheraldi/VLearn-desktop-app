@@ -178,6 +178,11 @@ class Model:
         res = cls(**kwargs)
         query = QtSql.QSqlQuery()
         query.setForwardOnly(True)
+        keys = {
+            k: v
+            for k, v in res.__dict__.items()
+            if k not in cls.IGNORE_KEY
+        }
         query.prepare("""
             INSERT INTO `{}` {}
             VALUES ({})
@@ -185,13 +190,13 @@ class Model:
             cls.TABLE,
             '({})'.format(
                 ', '.join([
-                    '`{}`'.format(x)
-                    for x in kwargs
+                    '`{}`'.format(k)
+                    for k in keys
                 ])
             ),
-            ', '.join('?' * len(kwargs))
+            ', '.join('?' * len(keys))
         ))
-        for _, v in kwargs.items():
+        for _, v in keys.items():
             query.addBindValue(v)
         if not query.exec():
             res = None
@@ -199,8 +204,6 @@ class Model:
             if query.exec('SELECT last_insert_rowid()'):
                 query.next()
                 res.__dict__[res.PRIMARY_KEY[0]] = query.value(0)
-            else:
-                print(query.lastError().text())
         return res
 
     def __repr__(self) -> str:
