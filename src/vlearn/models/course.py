@@ -33,25 +33,3 @@ class Course(Model):
         self.id_course = id_course
         super().__init__()
 
-if __name__ == '__main__': # pragma: no cover
-    import sys
-
-    from PyQt5 import QtSql
-    db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
-    db.setDatabaseName('db/database.db')
-    if not db.open():
-        print('error')
-        sys.exit()
-    db.exec(Course.CREATE_QUERY)
-    if db.lastError().text() == '':
-        c = Course.create(
-            judul='judul',
-            deskripsi='deskripsi',
-            harga=1,
-            link_video='link_video',
-            durasi=1
-        )
-        if c.delete():
-            print(c)
-    else:
-        print(db.lastError().text())
