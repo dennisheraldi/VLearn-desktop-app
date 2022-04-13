@@ -14,8 +14,10 @@ class Database:
         """
         db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
         db.setDatabaseName(db_file)
-
-        return db.open()
+        res = db.open()
+        if res:
+            db.exec('PRAGMA foreign_keys = ON;')
+        return res
 
     @staticmethod
     def create_table(create_table_sql):
