@@ -15,9 +15,9 @@ class Tanggapan(Model):
             `id_course` INTEGER NOT NULL,
             `nilai_rating` REAL NOT NULL,
             PRIMARY KEY (`id_review`, `id_pengguna`, `id_course`),
-            FOREIGN KEY (`id_review`) REFERENCES review(`id_review`),
-            FOREIGN KEY (`id_pengguna`) REFERENCES pengguna(`id_pengguna`),
-            FOREIGN KEY (`id_course`) REFERENCES courses(`id_course`)
+            FOREIGN KEY (`id_review`) REFERENCES review(`id_review`) ON DELETE CASCADE,
+            FOREIGN KEY (`id_pengguna`) REFERENCES pengguna(`id_pengguna`) ON DELETE CASCADE,
+            FOREIGN KEY (`id_course`) REFERENCES courses(`id_course`) ON DELETE CASCADE
         );
     """
 
