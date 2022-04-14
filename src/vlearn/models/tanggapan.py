@@ -4,7 +4,7 @@ from vlearn.models.base import Model
 
 
 class Tanggapan(Model):
-    """Base class for tanggapan model. 
+    """Base class for tanggapan model.
     """
     TABLE = 'tanggapan'
     CREATE_QUERY = """
@@ -24,11 +24,10 @@ class Tanggapan(Model):
     ATTRIBUTES = ['id_review', 'id_pengguna', 'id_course', 'nilai_rating']
 
     def __init__(self,
-        id_review:int, 
-        id_pengguna:int, 
+        id_review:int,
+        id_pengguna:int,
         id_course:int,
         nilai_rating:float
-        
     ):
         self.id_review = id_review
         self.id_pengguna = id_pengguna

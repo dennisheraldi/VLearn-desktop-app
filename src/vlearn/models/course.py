@@ -32,4 +32,3 @@ class Course(Model):
         self.durasi = durasi
         self.id_course = id_course
         super().__init__()
-

@@ -39,6 +39,9 @@ Make sure you created a good quality code with unit testing.
     ```
 
 4. Create a working branch and start with your changes!
+  ```sh
+  git checkout -b <branch_name>
+  ```
 
 ### Commit your update
 
