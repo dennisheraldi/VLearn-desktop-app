@@ -13,6 +13,7 @@ class Model:
     CREATE_QUERY = ''
     PRIMARY_KEY = []
     ATTRIBUTES = []
+    AUTOINCREMENT = True
     IGNORE_KEY = ('self', '__class__', '_Model__query_setval', '_Model__query_condpk')
 
     def __init__(self):
@@ -201,7 +202,7 @@ class Model:
         if not query.exec():
             res = None
         else:
-            if query.exec('SELECT last_insert_rowid()'):
+            if cls.AUTOINCREMENT and query.exec('SELECT last_insert_rowid()'):
                 query.next()
                 res.__dict__[res.PRIMARY_KEY[0]] = query.value(0)
         return res

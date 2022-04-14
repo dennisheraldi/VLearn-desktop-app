@@ -7,6 +7,7 @@ class Tanggapan(Model):
     """Base class for tanggapan model.
     """
     TABLE = 'tanggapan'
+    AUTOINCREMENT = False
     CREATE_QUERY = """
         CREATE TABLE IF NOT EXISTS `tanggapan` (
             `id_review` INTEGER NOT NULL,
