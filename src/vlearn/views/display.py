@@ -28,15 +28,18 @@ class DisplayManager:
 
         # Buat instance QApplication baru
         self.app = QtWidgets.QApplication(sys.argv)
+        from vlearn.views.auth_display import ViewAuth
+
         # Register semua fungsi pembuat window beserta routenya
         self.windows = {
-            # 'main': ViewMain.Main,
+            'auth.login': ViewAuth.Login,
+            'auth.register': ViewAuth.Register,
         }
-        # Window utama adalah `main`
+        # Window utama adalah `auth.login`
         self.current_window : AppDisplay  = None
-        # self.current_window = self.windows['main']()
+        self.current_window = self.windows['auth.login']()
         # # Tampilkan window utama
-        # self.current_window.show()
+        self.current_window.show()
         # Program exit dengan error kode dari QApplication
         sys.exit(self.app.exec_())
 

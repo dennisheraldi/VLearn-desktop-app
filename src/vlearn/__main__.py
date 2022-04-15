@@ -3,9 +3,13 @@
 
 import os
 
+from vlearn.controllers.course import CoursePengguna
 from vlearn.database import Database
-# from vlearn.views.display import DisplayManager
 from vlearn.models.course import Course
+from vlearn.models.pengguna import Pengguna
+from vlearn.models.review import Review
+from vlearn.models.tanggapan import Tanggapan
+from vlearn.views.display import DisplayManager
 
 if __name__ == '__main__':
     # Dapatkan direktori sekarang
@@ -20,8 +24,7 @@ if __name__ == '__main__':
     # Buat koneksi ke database
     Database.create_connection(database_path)
     # Buat tabel jika belum ada
-    for x in [Course]:
-        Database.create_table(x.CREATE_QUERY)
-    print('Hello')
+    for i in [Course, Pengguna, Review, Tanggapan, CoursePengguna]:
+        Database.create_table(i.CREATE_QUERY)
     # Tampilan menu utama
-    # DisplayManager()
+    DisplayManager()
