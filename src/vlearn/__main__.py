@@ -9,6 +9,7 @@ from vlearn.models.course import Course
 from vlearn.models.pengguna import Pengguna
 from vlearn.models.review import Review
 from vlearn.models.tanggapan import Tanggapan
+from vlearn.views.auth_display import ViewAuth
 from vlearn.views.display import DisplayManager
 
 if __name__ == '__main__':
@@ -27,4 +28,7 @@ if __name__ == '__main__':
     for i in [Course, Pengguna, Review, Tanggapan, CoursePengguna]:
         Database.create_table(i.CREATE_QUERY)
     # Tampilan menu utama
-    DisplayManager()
+    DisplayManager({
+        'auth.login': ViewAuth.Login,
+        'auth.register': ViewAuth.Register
+    })

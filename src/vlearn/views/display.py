@@ -4,6 +4,23 @@ import sys
 from PyQt5 import QtWidgets
 
 
+class AppDisplay(QtWidgets.QMainWindow):
+    """Base class for every views.
+    """
+    def __init__(self, user_interface: object):
+        """
+        Buat View baru untuk diregister ke UIManager
+
+        Args:
+            ui: Kode python UI QtDesigner yang digenerate dari pyuic5 (.ui)
+        """
+        super().__init__()
+        self.window = user_interface()
+        self.window.setupUi(self)
+        self.setWindowTitle(f'{self.windowTitle()} - VLearn')
+        self.setFixedSize(self.size())
+
+
 class DisplayManager:
     """Display manager."""
     __instance = None
@@ -17,7 +34,7 @@ class DisplayManager:
         """
         return DisplayManager.__instance
 
-    def __init__(self):
+    def __init__(self, displays: dict):
         """
         Membuat instance baru dari UIManager
         """
@@ -28,16 +45,11 @@ class DisplayManager:
 
         # Buat instance QApplication baru
         self.app = QtWidgets.QApplication(sys.argv)
-        from vlearn.views.auth_display import ViewAuth
 
         # Register semua fungsi pembuat window beserta routenya
-        self.windows = {
-            'auth.login': ViewAuth.Login,
-            'auth.register': ViewAuth.Register,
-        }
+        self.windows = displays
         # Window utama adalah `auth.login`
-        self.current_window : AppDisplay  = None
-        self.current_window = self.windows['auth.login']()
+        self.current_window : AppDisplay  = self.windows['auth.login']()
         # # Tampilkan window utama
         self.current_window.show()
         # Program exit dengan error kode dari QApplication
@@ -133,20 +145,3 @@ class DisplayManager:
         )
         if msg.exec() == QtWidgets.QMessageBox.Ok and ok_call is not None:
             ok_call()
-
-
-class AppDisplay(QtWidgets.QMainWindow):
-    """Base class for every views.
-    """
-    def __init__(self, user_interface: object):
-        """
-        Buat View baru untuk diregister ke UIManager
-
-        Args:
-            ui: Kode python UI QtDesigner yang digenerate dari pyuic5 (.ui)
-        """
-        super().__init__()
-        self.window = user_interface()
-        self.window.setupUi(self)
-        self.setWindowTitle(f'{self.windowTitle()} - VLearn')
-        self.setFixedSize(self.size())
