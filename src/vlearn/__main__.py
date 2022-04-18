@@ -3,12 +3,7 @@
 
 import os
 
-from vlearn.controllers.course import CoursePengguna
-from vlearn.database import Database
-from vlearn.models.course import Course
-from vlearn.models.pengguna import Pengguna
-from vlearn.models.review import Review
-from vlearn.models.tanggapan import Tanggapan
+from vlearn.models.seeder import Seeder
 from vlearn.views.auth_display import ViewAuth
 from vlearn.views.display import DisplayManager
 from vlearn.views.list_course_display import ListCourseDisplay
@@ -23,12 +18,8 @@ if __name__ == '__main__':
     if not os.path.exists('db'):
         # Buat folder `db` di direktori sekarang
         os.makedirs('db')
-    # Buat koneksi ke database
-    Database.create_connection(database_path)
-    # Buat tabel jika belum ada
-    for i in [Course, Pengguna, Review, Tanggapan, CoursePengguna]:
-        Database.create_table(i.CREATE_QUERY)
-
+    # Buat koneksi ke database dan buat tabel jika belum ada
+    Seeder(database_path)
     # Tampilan menu utama
     DisplayManager({
         'auth.login': ViewAuth.Login,
