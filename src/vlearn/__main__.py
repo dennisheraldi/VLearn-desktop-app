@@ -11,6 +11,7 @@ from vlearn.models.review import Review
 from vlearn.models.tanggapan import Tanggapan
 from vlearn.views.auth_display import ViewAuth
 from vlearn.views.display import DisplayManager
+from vlearn.views.list_course_display import ListCourseDisplay
 
 if __name__ == '__main__':
     # Dapatkan direktori sekarang
@@ -27,8 +28,10 @@ if __name__ == '__main__':
     # Buat tabel jika belum ada
     for i in [Course, Pengguna, Review, Tanggapan, CoursePengguna]:
         Database.create_table(i.CREATE_QUERY)
+
     # Tampilan menu utama
     DisplayManager({
         'auth.login': ViewAuth.Login,
-        'auth.register': ViewAuth.Register
+        'auth.register': ViewAuth.Register,
+        'list_course': ListCourseDisplay,
     })
