@@ -8,6 +8,7 @@ from vlearn.views.auth_display import ViewAuth
 from vlearn.views.beri_tanggapan_display import ViewBeriTanggapan
 from vlearn.views.detail_course_display import ViewDetailCourse
 from vlearn.views.display import DisplayManager
+from vlearn.views.isi_saldo_display import IsiSaldoDisplay
 from vlearn.views.list_course_display import ListCourseDisplay
 
 if __name__ == '__main__':
@@ -28,5 +29,6 @@ if __name__ == '__main__':
         'auth.register': ViewAuth.Register,
         'list_course': ListCourseDisplay,
         'detail_course': ViewDetailCourse,
-        'beri_tanggapan': ViewBeriTanggapan
+        'beri_tanggapan': ViewBeriTanggapan,
+        'isi_saldo': IsiSaldoDisplay
     })

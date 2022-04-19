@@ -49,7 +49,7 @@ class DisplayManager:
         # Register semua fungsi pembuat window beserta routenya
         self.windows = displays
         # Window utama adalah `auth.login`
-        self.current_window : AppDisplay  = self.windows['detail_course'](0)
+        self.current_window : AppDisplay  = self.windows['auth.login']()
         # # Tampilkan window utama
         self.current_window.show()
         # Program exit dengan error kode dari QApplication

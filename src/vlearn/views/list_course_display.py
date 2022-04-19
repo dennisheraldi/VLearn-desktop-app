@@ -5,7 +5,7 @@ from vlearn.controllers.auth import AuthController
 from vlearn.controllers.course import CourseManager
 from vlearn.controllers.tanggapan import TanggapanManager
 from vlearn.models.course import Course
-from vlearn.views.display import AppDisplay
+from vlearn.views.display import AppDisplay, DisplayManager
 from vlearn.views.ui.list_course import Ui_MainWindow
 
 
@@ -20,7 +20,8 @@ class ListCourseDisplay(AppDisplay):
         self.window.injectData(get_data(is_all=True))
         self.window.injectFecthFunc(get_data)
         self.window.setPage(0)
-
+        self.window.isiSaldoButton.mousePressEvent = \
+                lambda _: DisplayManager.ins().show("isi_saldo")
 
 def get_data(is_all):
     """Fetch function to get courses data
