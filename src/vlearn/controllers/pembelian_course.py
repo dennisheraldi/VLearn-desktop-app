@@ -24,9 +24,12 @@ class PembelianCourseController:
         if not PembelianCourseController._check_sufficient_balance(p, course):
             return False
 
-        SaldoManager.sub_pengguna_saldo(p, course.harga)
+        success_flag = not CourseManager.add_course_pengguna(course, p) is None
 
-        return not CourseManager.add_course_pengguna(course, p) is None
+        if success_flag:
+            SaldoManager.sub_pengguna_saldo(p, course.harga)
+
+        return success_flag
 
     @staticmethod
     def _check_sufficient_balance(

@@ -5,6 +5,7 @@ import os
 
 from vlearn.models.seeder import Seeder
 from vlearn.views.auth_display import ViewAuth
+from vlearn.views.beli_course_display import BeliCourseDisplay
 from vlearn.views.beri_tanggapan_display import ViewBeriTanggapan
 from vlearn.views.detail_course_display import ViewDetailCourse
 from vlearn.views.display import DisplayManager
@@ -30,5 +31,6 @@ if __name__ == '__main__':
         'list_course': ListCourseDisplay,
         'detail_course': ViewDetailCourse,
         'beri_tanggapan': ViewBeriTanggapan,
-        'isi_saldo': IsiSaldoDisplay
+        'isi_saldo': IsiSaldoDisplay,
+        'beli_course': BeliCourseDisplay,
     })

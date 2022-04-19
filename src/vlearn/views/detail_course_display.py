@@ -16,6 +16,7 @@ class ViewDetailCourse(AppDisplay):
     '''
     View untuk detail course
     '''
+
     def __init__(self, course_id):
         '''
         Buat view detail course
@@ -23,8 +24,6 @@ class ViewDetailCourse(AppDisplay):
         super().__init__(Ui_DetailCourse)
 
         self.i = 0
-
-        print("COURSE ID", course_id)
 
         course_data = Course.get(id_course=course_id)
 
@@ -47,8 +46,8 @@ class ViewDetailCourse(AppDisplay):
                     r"src\vlearn\views\ui\img\course_img.png")))
         self.window.img_course.setScaledContents(True)
 
-
-        daftar_tanggapan, rating = TanggapanManager.get_course_tanggapan(course_data)
+        daftar_tanggapan, rating = TanggapanManager.get_course_tanggapan(
+            course_data)
         for tanggapan in daftar_tanggapan:
             self.show_tanggapan(tanggapan)
 
@@ -61,6 +60,9 @@ class ViewDetailCourse(AppDisplay):
         self.window.btn_back.clicked.connect(
             lambda _: DisplayManager.ins().show("list_course")
         )
+        self.window.btn_beli.clicked.connect(
+            lambda _: DisplayManager.ins().show("beli_course", course_id=course_id)
+        )
 
     def show_tanggapan(self, tanggapan):
         '''
@@ -69,7 +71,7 @@ class ViewDetailCourse(AppDisplay):
         self.i = self.i + 1
 
         setattr(self, f"tanggapan_{self.i}",
-            QtWidgets.QGroupBox(self.window.scrollAreaWidgetContents))
+                QtWidgets.QGroupBox(self.window.scrollAreaWidgetContents))
         getattr(self, f"tanggapan_{self.i}").\
             setGeometry(QtCore.QRect(60, 80, 737, 93))
         getattr(self, f"tanggapan_{self.i}").\
@@ -78,32 +80,32 @@ class ViewDetailCourse(AppDisplay):
             setMaximumSize(QtCore.QSize(16777215, 93))
         getattr(self, f"tanggapan_{self.i}").\
             setStyleSheet("QGroupBox {\n"
-"    border : 1px solid black;\n"
-"}")
+                          "    border : 1px solid black;\n"
+                          "}")
         getattr(self, f"tanggapan_{self.i}").\
             setObjectName(f"tanggapan_{self.i}")
 
         setattr(self, f"hL_{self.i}",
-            QtWidgets.QHBoxLayout(getattr(self, f"tanggapan_{self.i}")))
+                QtWidgets.QHBoxLayout(getattr(self, f"tanggapan_{self.i}")))
         getattr(self, f"hL_{self.i}").\
             setObjectName(f"hL_{self.i}")
         setattr(self.window, f"tanggapan_{self.i}",
-            getattr(self, f"tanggapan_{self.i}"))
+                getattr(self, f"tanggapan_{self.i}"))
 
         setattr(self, f"frame_{self.i}",
-            QtWidgets.QFrame(getattr(self.window, f"tanggapan_{self.i}")))
+                QtWidgets.QFrame(getattr(self.window, f"tanggapan_{self.i}")))
         getattr(self, f"frame_{self.i}").\
             setMaximumSize(QtCore.QSize(16777215, 74))
         getattr(self, f"frame_{self.i}").\
             setObjectName(f"frame_{self.i}")
 
         setattr(self, f"vL_{self.i}",
-            QtWidgets.QVBoxLayout( getattr(self, f"frame_{self.i}")))
+                QtWidgets.QVBoxLayout(getattr(self, f"frame_{self.i}")))
         getattr(self, f"vL_{self.i}").\
             setObjectName(f"vL_{self.i}")
 
         setattr(self, f"label_nama_penanggap_{self.i}",
-            QtWidgets.QLabel(getattr(self, f"frame_{self.i}")))
+                QtWidgets.QLabel(getattr(self, f"frame_{self.i}")))
         getattr(self, f"label_nama_penanggap_{self.i}").\
             setMinimumSize(QtCore.QSize(0, 21))
         font = QtGui.QFont()
@@ -121,7 +123,7 @@ class ViewDetailCourse(AppDisplay):
             addWidget(getattr(self, f"label_nama_penanggap_{self.i}"))
 
         setattr(self, f"label_isi_tanggapan_{self.i}",
-            QtWidgets.QLabel(getattr(self, f"frame_{self.i}")))
+                QtWidgets.QLabel(getattr(self, f"frame_{self.i}")))
         getattr(self, f"label_isi_tanggapan_{self.i}").\
             setWordWrap(True)
         getattr(self, f"label_isi_tanggapan_{self.i}").\
@@ -133,7 +135,7 @@ class ViewDetailCourse(AppDisplay):
             addWidget(getattr(self, f"frame_{self.i}"))
 
         setattr(self, f"label_rating_penaggap_{self.i}",
-            QtWidgets.QLabel(getattr(self, f"tanggapan_{self.i}")))
+                QtWidgets.QLabel(getattr(self, f"tanggapan_{self.i}")))
 
         getattr(self, f"label_rating_penaggap_{self.i}").\
             setMinimumSize(QtCore.QSize(71, 0))
