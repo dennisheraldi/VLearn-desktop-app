@@ -18,7 +18,7 @@ class AppDisplay(QtWidgets.QMainWindow):
         self.window = user_interface()
         self.window.setupUi(self)
         self.setWindowTitle(f'{self.windowTitle()} - VLearn')
-        self.setFixedSize(self.size())
+        # self.setFixedSize(self.size())
 
 
 class DisplayManager:
@@ -49,7 +49,7 @@ class DisplayManager:
         # Register semua fungsi pembuat window beserta routenya
         self.windows = displays
         # Window utama adalah `auth.login`
-        self.current_window : AppDisplay  = self.windows['auth.login']()
+        self.current_window : AppDisplay  = self.windows['detail_course'](0)
         # # Tampilkan window utama
         self.current_window.show()
         # Program exit dengan error kode dari QApplication

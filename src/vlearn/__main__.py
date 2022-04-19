@@ -5,6 +5,8 @@ import os
 
 from vlearn.models.seeder import Seeder
 from vlearn.views.auth_display import ViewAuth
+from vlearn.views.beri_tanggapan_display import ViewBeriTanggapan
+from vlearn.views.detail_course_display import ViewDetailCourse
 from vlearn.views.display import DisplayManager
 from vlearn.views.list_course_display import ListCourseDisplay
 
@@ -19,10 +21,12 @@ if __name__ == '__main__':
         # Buat folder `db` di direktori sekarang
         os.makedirs('db')
     # Buat koneksi ke database dan buat tabel jika belum ada
-    Seeder(database_path)
+    seeder = Seeder(database_path)
     # Tampilan menu utama
     DisplayManager({
         'auth.login': ViewAuth.Login,
         'auth.register': ViewAuth.Register,
         'list_course': ListCourseDisplay,
+        'detail_course': ViewDetailCourse,
+        'beri_tanggapan': ViewBeriTanggapan
     })

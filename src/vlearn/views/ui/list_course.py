@@ -10,6 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from vlearn.views.display import DisplayManager
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -271,4 +273,6 @@ class Ui_MainWindow(object):
         self.setPage(0)
 
     def openCourse(self, idx):
-        print(f"OPENING COURSE {idx}")
+        # print(f"OPENING COURSE {idx}")
+        DisplayManager.ins().show('detail_course', course_id=idx)
+

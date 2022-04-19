@@ -22,14 +22,29 @@ class ViewAuth():
             # UI setup
             super().__init__(Ui_Login)
 
-            email = self.window.input_email.text()
-            password = self.window.input_password.text()
-
             # Callback
             self.window.link_register.mousePressEvent = \
                 lambda _: DisplayManager.ins().show('auth.register')
-            self.window.btn_login.clicked.connect(
-                lambda _: login(email, password))
+            self.window.btn_login.clicked.connect(self.login)
+
+
+        def login(self):
+            '''
+            Menangani login pengguna
+            '''
+            email = self.window.input_email.text()
+            password = self.window.input_password.text()
+
+            success = AuthController.login(email, password)
+            if not success:
+                DisplayManager.ins().show_error('Login Failed',
+                    'Username or password incorrect')
+            else :
+                DisplayManager.ins().show_success('Login Success',
+                    'Login success')
+                DisplayManager.ins().show('list_course')
+
+
     class Register(AppDisplay):
         '''
         View untuk register
@@ -37,36 +52,26 @@ class ViewAuth():
         def __init__(self):
             super().__init__(Ui_Register)
 
+            # Callback
+            self.window.link_login.mousePressEvent = \
+                lambda _: DisplayManager.ins().show('auth.login')
+            self.window.btn_register.clicked.connect(self.register)
+
+        def register(self):
+            '''
+            Menagani regristasi pengguna baru
+            '''
+
             name = self.window.input_name.text()
             email = self.window.input_email.text()
             password = self.window.input_password.text()
 
-            # Callback
-            self.window.link_login.mousePressEvent = \
-                lambda _: DisplayManager.ins().show('auth.login')
-            self.window.btn_register.clicked.connect(
-                lambda _: register(name, email, password))
-
-
-def login(email, password):
-    '''
-    Menangani login pengguna
-    '''
-    success = AuthController.login(email, password)
-    if not success:
-        DisplayManager.ins().show_error('Login Failed',
-            'Username or password incorrect')
-
-def register(name, email, password):
-    '''
-    Menagani regristasi pengguna baru
-    '''
-    success = AuthController.register(name, email, password, False)
-    if not success:
-        DisplayManager.ins()\
-            .show_error('Register Failed', 'Invalid input')
-    else:
-        DisplayManager.ins()\
-            .show_success('Register Success', 'Register success')
-        DisplayManager.ins()\
-            .show('auth.login')
+            success = AuthController.register(name, email, password, False)
+            if not success:
+                DisplayManager.ins()\
+                    .show_error('Register Failed', 'Invalid input')
+            else:
+                DisplayManager.ins()\
+                    .show_success('Register Success', 'Register success')
+                DisplayManager.ins()\
+                    .show('auth.login')

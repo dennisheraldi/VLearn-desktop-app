@@ -35,9 +35,10 @@ class TanggapanManager:
         Returns:
             (list, real): List of review objects and average rating.
         """
-        tanggapan = Tanggapan.all(id_course=course.id_course)
+        tanggapan:list[Tanggapan] = Tanggapan.all(id_course=course.id_course)
         avg_rating = 0.0
         for i in tanggapan:
+            i.pengguna = Pengguna.get(id_pengguna=i.id_pengguna)
             i.review = Review.get(id_review=i.id_review)
             avg_rating += i.nilai_rating
         if len(tanggapan) > 0:
@@ -66,5 +67,5 @@ class TanggapanManager:
             id_pengguna=pengguna.id_pengguna,
             nilai_rating=nilai_rating,
         )
-        t.review = review
+        t.review = rev
         return t
