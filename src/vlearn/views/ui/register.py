@@ -139,7 +139,7 @@ class Ui_MainWindow(object):
 "}")
         self.btn_register.setObjectName("btn_register")
         self.link_login = QtWidgets.QLabel(self.groupBox_2)
-        self.link_login.setGeometry(QtCore.QRect(190, 280, 111, 20))
+        self.link_login.setGeometry(QtCore.QRect(30, 280, 111, 20))
         font = QtGui.QFont()
         font.setPointSize(9)
         self.link_login.setFont(font)
