@@ -13,7 +13,8 @@ setup(
     packages=find_packages(where='src'),
     install_requires=[
         'PyQt5',
-        'argon2-cffi'
+        'argon2-cffi',
+        'faker'
     ],
     include_package_data=True,
     zip_safe=False,
