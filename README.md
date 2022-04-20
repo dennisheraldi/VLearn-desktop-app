@@ -37,6 +37,7 @@ _P/L ini dibangun sebagai pemenuhan Tugas Besar IF2250 Rekayasa Perangkat Lunak 
 - isort
 - Pytest
 - Faker
+- argon2
 
 ## Features
 
@@ -101,7 +102,7 @@ Modul yang diimplementasikan pada P/L ini adalah sebagai berikut:
 
 ## Developer
 
-Dibuat oleh Kelompok 04 K01 IF2250 Rekayasa dan Perangkat Lunak Semester 2 2021/2022.
+Dibuat oleh Kelompok 04 K01 IF2250 Rekayasa Perangkat Lunak Semester 2 2021/2022.
 
 1. Rozan Fadhil Al Hafidz (13520039)
 2. Amar Fadil (13520103)

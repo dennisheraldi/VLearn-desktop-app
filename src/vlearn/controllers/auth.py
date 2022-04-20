@@ -1,5 +1,6 @@
 """Module for auth controller.
 """
+from vlearn.database import Database
 from vlearn.models.pengguna import Pengguna
 
 
@@ -28,7 +29,7 @@ class AuthController:
             bool: Is user successfully login to system.
         """
         p = Pengguna.get(email=email)
-        if p is not None and p.password == password:
+        if p is not None and Database.password.verify(p.password, password):
             AuthController.__LOGGED_USER = p
             return True
         return False
@@ -51,7 +52,7 @@ class AuthController:
             p = Pengguna.create(
                 nama=nama,
                 email=email,
-                password=password,
+                password=Database.password.hash(password),
                 role='admin' if is_admin else 'user',
             )
             AuthController.__LOGGED_USER = p

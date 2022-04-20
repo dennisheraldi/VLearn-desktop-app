@@ -35,7 +35,7 @@ class Seeder:
             p = Pengguna.create(
                 nama=self.fake.name(),
                 email=self.fake.email(),
-                password=self.fake.password(),
+                password=Database.password.hash(self.fake.password()),
                 role='user',
                 saldo=self.fake.random_int(min=0, max=1000000),
             )

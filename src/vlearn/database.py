@@ -1,9 +1,13 @@
 """Module for static database methods."""
+from argon2 import PasswordHasher
 from PyQt5 import QtSql
 
 
 class Database:
     """Class for static database methods."""
+    # Global password hasher
+    password = PasswordHasher()
+
     @staticmethod
     def create_connection(db_file):
         """Buat koneksi ke database SQLite.
