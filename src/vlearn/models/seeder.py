@@ -1,5 +1,6 @@
 """Seeder module.
 """
+import datetime
 import random
 
 from faker import Faker
@@ -15,6 +16,7 @@ from vlearn.models.tanggapan import Tanggapan
 class Seeder:
     """Base class for seeder.
     """
+
     def __init__(self, database_path):
         # Buat koneksi ke database
         Database.create_connection(database_path)
@@ -35,7 +37,7 @@ class Seeder:
                 email=self.fake.email(),
                 password=self.fake.password(),
                 role='user',
-                saldo=self.fake.random_int(min=0,max=1000000),
+                saldo=self.fake.random_int(min=0, max=1000000),
             )
             self.pengguna_id.append(p.id_pengguna)
 
@@ -46,9 +48,9 @@ class Seeder:
             c = Course.create(
                 judul=self.fake.sentence(),
                 deskripsi=self.fake.text(),
-                harga=self.fake.random_int(min=0,max=1000000),
+                harga=self.fake.random_int(min=0, max=1000000),
                 link_video=self.fake.url(),
-                durasi=self.fake.random_int(min=0,max=100),
+                durasi=self.fake.random_int(min=0, max=100),
             )
             self.course_id.append(c.id_course)
 
@@ -81,10 +83,14 @@ class Seeder:
             N = self.fake.unique.random_int(min=0, max=99)
             fake_uniq.unique.clear()
             for _ in range(N):
+                rand_time = self.fake.date_time_between(
+                    start_date='-5y', end_date='now')
+
                 CoursePengguna.create(
                     id_pengguna=v,
-                    id_course=self.course_id[fake_uniq.unique.random_int(min=0, max=99)],
-                    waktu_pembelian=self.fake.date_time_between(start_date='-5y', end_date='now')
+                    id_course=self.course_id[fake_uniq.unique.random_int(
+                        min=0, max=99)],
+                    waktu_pembelian=datetime.datetime.timestamp(rand_time),
                 )
 
     def seed_all(self):
@@ -100,5 +106,5 @@ class Seeder:
         Database.close_connection()
 
 
-if __name__ == '__main__': # pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
     Seeder('db/database.db').seed_all()
