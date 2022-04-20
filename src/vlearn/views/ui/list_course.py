@@ -223,28 +223,16 @@ class Ui_MainWindow(object):
                 layout = QtWidgets.QHBoxLayout()
                 widget.setLayout(layout)
 
-                pixmap = QtGui.QPixmap('static/imgs/icon.jpg')
-                imgLabel = QtWidgets.QLabel(widget)
-                imgLabel.setPixmap(pixmap)
-                imgLabel.setFixedSize(30, 30)
-                layout.addWidget(imgLabel)
-
                 label = QtWidgets.QLabel(widget)
-                label.setText(slicedData[i].judul)
+                label.setText("🎞️ " + slicedData[i].judul)
                 layout.addWidget(label)
 
                 rightWidget = QtWidgets.QWidget(widget)
                 rightLayout = QtWidgets.QHBoxLayout()
                 rightWidget.setLayout(rightLayout)
 
-                pixmap2 = QtGui.QPixmap('static/imgs/icon.jpg')
-                imgLabel2 = QtWidgets.QLabel(rightWidget)
-                imgLabel2.setPixmap(pixmap2)
-                imgLabel2.setFixedSize(30, 30)
-                rightLayout.addWidget(imgLabel2)
-
                 label2 = QtWidgets.QLabel(rightWidget)
-                label2.setText(str(round(slicedData[i].avg_rating, 2)))
+                label2.setText("⭐ " + str(round(slicedData[i].avg_rating, 2)))
                 rightLayout.addWidget(label2)
                 rightLayout.setContentsMargins(0, 0, 0, 0)
 
@@ -275,4 +263,3 @@ class Ui_MainWindow(object):
     def openCourse(self, idx):
         # print(f"OPENING COURSE {idx}")
         DisplayManager.ins().show('detail_course', course_id=idx)
-
