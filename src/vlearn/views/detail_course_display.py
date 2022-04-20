@@ -2,11 +2,12 @@
 '''
 
 import locale
+import os
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 from vlearn.controllers.auth import AuthController
-from vlearn.controllers.course import Course
+from vlearn.controllers.course import Course, CoursePengguna
 from vlearn.controllers.tanggapan import TanggapanManager
 from vlearn.views.display import AppDisplay, DisplayManager
 from vlearn.views.ui.detail_course import Ui_MainWindow as Ui_DetailCourse
@@ -25,13 +26,16 @@ class ViewDetailCourse(AppDisplay):
 
         self.i = 0
 
-        course_data = Course.get(id_course=course_id)
+        self.course_data = Course.get(id_course=course_id)
+
+        is_sudah_beli = CoursePengguna.get(id_course = course_id,
+            id_pengguna = AuthController.get_user().id_pengguna) is not None
 
         locale.setlocale(locale.LC_ALL, "")
-        self.window.label_nama_course.setText(course_data.judul)
-        self.window.label_deskripsi_course.setText(course_data.deskripsi)
+        self.window.label_nama_course.setText(self.course_data.judul)
+        self.window.label_deskripsi_course.setText(self.course_data.deskripsi)
         self.window.label_harga_course.setText(
-            locale.currency(course_data.harga, grouping=True)
+            locale.currency(self.course_data.harga, grouping=True)
         )
 
         self.window.label_saldo.setText(
@@ -47,11 +51,27 @@ class ViewDetailCourse(AppDisplay):
         self.window.img_course.setScaledContents(True)
 
         daftar_tanggapan, rating = TanggapanManager.get_course_tanggapan(
-            course_data)
+            self.course_data)
         for tanggapan in daftar_tanggapan:
             self.show_tanggapan(tanggapan)
 
         self.window.label_rating_course.setText("⭐ " + str(round(rating, 2)))
+
+
+        if is_sudah_beli:
+            self.window.btn_beli.setText("Tonton Course")
+            self.window.btn_berikan_tanggapan.setEnabled(True)
+            self.window.btn_beli.clicked.connect(
+                self.toton_course
+            )
+        else:
+            self.window.btn_beli.setText("Beli Course")
+            self.window.btn_beli.clicked.connect(
+                lambda _: DisplayManager.ins().show("beli_course",
+                    course_id=course_id
+                )
+            )
+            self.window.btn_berikan_tanggapan.setEnabled(False)
 
         # Callback
         self.window.btn_berikan_tanggapan.clicked.connect(
@@ -60,9 +80,15 @@ class ViewDetailCourse(AppDisplay):
         self.window.btn_back.clicked.connect(
             lambda _: DisplayManager.ins().show("list_course")
         )
-        self.window.btn_beli.clicked.connect(
-            lambda _: DisplayManager.ins().show("beli_course", course_id=course_id)
-        )
+
+    def toton_course(self):
+        '''
+        Give course link video to customer
+        '''
+        DisplayManager.ins()\
+            .show_success("Menonton Course",
+                "Membuka " + self.course_data.link_video)
+        os.system("start " + self.course_data.link_video)
 
     def show_tanggapan(self, tanggapan):
         '''
@@ -138,9 +164,9 @@ class ViewDetailCourse(AppDisplay):
                 QtWidgets.QLabel(getattr(self, f"tanggapan_{self.i}")))
 
         getattr(self, f"label_rating_penaggap_{self.i}").\
-            setMinimumSize(QtCore.QSize(71, 0))
+            setMinimumSize(QtCore.QSize(76, 0))
         getattr(self, f"label_rating_penaggap_{self.i}").\
-            setMaximumSize(QtCore.QSize(71, 26))
+            setMaximumSize(QtCore.QSize(76, 26))
 
         font = QtGui.QFont()
         font.setPointSize(14)

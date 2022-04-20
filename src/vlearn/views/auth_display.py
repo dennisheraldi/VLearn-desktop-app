@@ -37,11 +37,11 @@ class ViewAuth():
 
             success = AuthController.login(email, password)
             if not success:
-                DisplayManager.ins().show_error('Login Failed',
-                    'Username or password incorrect')
+                DisplayManager.ins().show_error('Login Gagal',
+                    'Email atau password salah')
             else :
-                DisplayManager.ins().show_success('Login Success',
-                    'Login success')
+                DisplayManager.ins().show_success('Login Berhasil',
+                    'Login berhasil')
                 DisplayManager.ins().show('list_course')
 
 
@@ -69,9 +69,9 @@ class ViewAuth():
             success = AuthController.register(name, email, password, False)
             if not success:
                 DisplayManager.ins()\
-                    .show_error('Register Failed', 'Invalid input')
+                    .show_error('Register Failed', 'Gagal mendaftar akun baru')
             else:
                 DisplayManager.ins()\
-                    .show_success('Register Success', 'Register success')
+                    .show_success('Register Berhasil', 'Berhasil mendaftar akun baru')
                 DisplayManager.ins()\
                     .show('auth.login')

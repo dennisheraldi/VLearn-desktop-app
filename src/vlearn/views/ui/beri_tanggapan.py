@@ -70,12 +70,12 @@ class Ui_MainWindow(object):
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         self.spinBox = QtWidgets.QDoubleSpinBox(self.groupBox)
-        self.spinBox.setGeometry(QtCore.QRect(120, 10, 42, 22))
+        self.spinBox.setGeometry(QtCore.QRect(120, 10, 45, 22))
         self.spinBox.setStyleSheet("QDoubleSpinBox {\n"
 "    background-color: #c8c4c4;\n"
 "    border-radius:5%;\n"
 "}")
-        self.spinBox.setMinimum(1)
+        self.spinBox.setMinimum(0)
         self.spinBox.setMaximum(5)
         self.spinBox.setObjectName("spinBox")
         self.textEdit = QtWidgets.QTextEdit(self.groupBox)

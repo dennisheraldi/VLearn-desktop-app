@@ -96,6 +96,7 @@ class Ui_MainWindow(object):
 "}")
         self.input_email.setObjectName("input_email")
         self.input_password = QtWidgets.QLineEdit(self.groupBox)
+        self.input_password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.input_password.setGeometry(QtCore.QRect(50, 160, 261, 24))
         font = QtGui.QFont()
         font.setPointSize(9)

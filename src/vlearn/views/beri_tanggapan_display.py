@@ -40,7 +40,7 @@ class ViewBeriTanggapan(AppDisplay):
         TanggapanManager.add_course_tanggapan(
             Course.get(id_course=self.course_id),
             AuthController.get_user(), rating, review)
-        DisplayManager.ins().show_success('Success',
-            'Tanggapan added successfully')
+        DisplayManager.ins().show_success('Sukses',
+            'Berhasil menambah tanggapan')
         DisplayManager.ins().show('detail_course',
             course_id = self.course_id)

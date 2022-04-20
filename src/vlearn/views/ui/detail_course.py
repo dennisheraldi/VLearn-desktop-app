@@ -89,8 +89,8 @@ class Ui_MainWindow(object):
         spacerItem3 = QtWidgets.QSpacerItem(16777215, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem3)
         self.label_saldo = QtWidgets.QLabel(self.frame)
-        self.label_saldo.setMinimumSize(QtCore.QSize(131, 26))
-        self.label_saldo.setMaximumSize(QtCore.QSize(131, 26))
+        self.label_saldo.setMinimumSize(QtCore.QSize(145, 26))
+        self.label_saldo.setMaximumSize(QtCore.QSize(145, 26))
         self.label_saldo.setStyleSheet("QLabel{\n"
 "    background-color:\"white\"\n"
 "}")
@@ -150,8 +150,8 @@ class Ui_MainWindow(object):
         self.label_harga_course.setObjectName("label_harga_course")
         self.verticalLayout.addWidget(self.label_harga_course)
         self.btn_beli = QtWidgets.QPushButton(self.groupBox)
-        self.btn_beli.setMinimumSize(QtCore.QSize(119, 31))
-        self.btn_beli.setMaximumSize(QtCore.QSize(119, 31))
+        self.btn_beli.setMinimumSize(QtCore.QSize(140, 31))
+        self.btn_beli.setMaximumSize(QtCore.QSize(140, 31))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.btn_beli.setFont(font)
