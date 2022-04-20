@@ -89,8 +89,8 @@ class Ui_MainWindow(object):
         spacerItem3 = QtWidgets.QSpacerItem(16777215, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem3)
         self.label_saldo = QtWidgets.QLabel(self.frame)
-        self.label_saldo.setMinimumSize(QtCore.QSize(145, 26))
-        self.label_saldo.setMaximumSize(QtCore.QSize(145, 26))
+        self.label_saldo.setMinimumSize(QtCore.QSize(145, 31))
+        self.label_saldo.setMaximumSize(QtCore.QSize(145, 31))
         self.label_saldo.setStyleSheet("QLabel{\n"
 "    background-color:\"white\"\n"
 "}")

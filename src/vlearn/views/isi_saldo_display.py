@@ -1,6 +1,8 @@
 '''Module implementation of isi saldo view.
 '''
 
+import locale
+
 from vlearn.controllers.auth import AuthController
 from vlearn.controllers.saldo import SaldoManager
 from vlearn.views.display import AppDisplay, DisplayManager
@@ -20,7 +22,11 @@ class IsiSaldoDisplay(AppDisplay):
 
         self.p = AuthController.get_user()
         saldo_value = SaldoManager.get_pengguna_saldo(self.p)
-        self.window.tf_saldo.setText("Rp" + str(saldo_value)) # Menampilkan saldo sekarang
+
+        locale.setlocale(locale.LC_ALL, "")
+        self.window.tf_saldo.setText(
+            locale.currency(saldo_value, grouping=True)
+        ) # Menampilkan saldo sekarang
 
         # Callback
         self.window.btn_pay.clicked.connect(self.pay) # Jika menekan tombol bayar

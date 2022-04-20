@@ -108,7 +108,8 @@ class Ui_MainWindow(object):
 "    background-color: #c8c4c4;\n"
 "    border-style: outset;\n"
 "    padding: 2px;\n"
-"    border-radius: 5%\n"
+"    border-radius: 5%;\n"
+"    border: 1px solid black;\n"
 "}\n"
 "\n"
 "QPushButton {\n"
@@ -126,32 +127,19 @@ class Ui_MainWindow(object):
         self.btn_pay.setObjectName("btn_pay")
         self.btn_cancel = QtWidgets.QPushButton(self.groupBox_2)
         self.btn_cancel.setGeometry(QtCore.QRect(30, 220, 75, 23))
-        self.btn_cancel.setStyleSheet("QPushButton {\n"
-"    background-color: #c8c4c4;\n"
-"    border-style: outset;\n"
-"    padding: 2px;\n"
-"    border-radius: 5%\n"
+        self.btn_cancel.setStyleSheet("QPushButton{\n"
+"background-color:#b5ffd9;\n"
+"border: none;\n"
+"border-radius: 4px;\n"
+"border: 1px solid black;\n"
 "}\n"
-"\n"
 "QPushButton:hover{\n"
-"  background-color: #a8a4a4;\n"
-"  color: #fff;\n"
+"background-color:#a5f0cc;\n"
 "}\n"
-"\n"
-".btn:focus{\n"
-"  background-color: #a8a4a4;\n"
-"  color: #fff;\n"
+"QPushButton:pressed{\n"
+"background-color:#a0d6b9;\\n\"\n"
 "}\n"
-"\n"
-"QPushButton:active{\n"
-"  background-color: #c8c4c4;\n"
-"  color: #fff;\n"
-"}\n"
-"\n"
-"QPushButton:active{\n"
-"  background-color: #c8c4c4;\n"
-"  color: #fff;\n"
-"}")
+"")
         self.btn_cancel.setObjectName("btn_cancel")
         self.verticalLayout.addWidget(self.groupBox_2)
         spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)

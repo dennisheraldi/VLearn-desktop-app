@@ -1,5 +1,6 @@
 """Module for beli course page controller
 """
+import locale
 
 from vlearn.controllers.auth import AuthController
 from vlearn.controllers.pembelian_course import PembelianCourseController
@@ -21,9 +22,16 @@ class BeliCourseDisplay(AppDisplay):
         course = Course.get(id_course=self.course_id)
         user = AuthController.get_user()
 
+        locale.setlocale(locale.LC_ALL, '')
+
         self.window.label_2.setText(
-            f'Apakah anda ingin membeli course {course.judul} dengan harga {course.harga}?')
-        self.window.label_3.setText(f'Saldo anda: {user.saldo}')
+            f'Apakah anda ingin membeli course {course.judul}\
+dengan harga {locale.currency(course.harga, grouping=True)}?'
+        )
+
+        self.window.label_3.setText(
+            f'Saldo anda: {locale.currency(user.saldo, grouping=True)}'
+        )
 
         self.window.pushButton.clicked.connect(self.batal)
         self.window.pushButton_2.clicked.connect(self.lanjut)

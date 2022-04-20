@@ -35,6 +35,12 @@ class ViewAuth():
             email = self.window.input_email.text()
             password = self.window.input_password.text()
 
+            if email == '' or password == '':
+                DisplayManager.ins()\
+                    .show_error('Register Failed',
+                        'Email atau password tidak boleh kosong')
+                return
+
             success = AuthController.login(email, password)
             if not success:
                 DisplayManager.ins().show_error('Login Gagal',
@@ -66,10 +72,17 @@ class ViewAuth():
             email = self.window.input_email.text()
             password = self.window.input_password.text()
 
+
+            if name == '' or email == '' or password == '':
+                DisplayManager.ins()\
+                    .show_error('Register Failed',
+                        'Nama, email, atau password tidak boleh kosong')
+                return
+
             success = AuthController.register(name, email, password, False)
             if not success:
                 DisplayManager.ins()\
-                    .show_error('Register Failed', 'Gagal mendaftar akun baru')
+                    .show_error('Register Failed', 'Email sudah digunakan')
             else:
                 DisplayManager.ins()\
                     .show_success('Register Berhasil', 'Berhasil mendaftar akun baru')

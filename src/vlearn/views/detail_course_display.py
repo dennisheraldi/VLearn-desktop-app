@@ -2,7 +2,7 @@
 '''
 
 import locale
-import os
+import subprocess
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -62,7 +62,7 @@ class ViewDetailCourse(AppDisplay):
             self.window.btn_beli.setText("Tonton Course")
             self.window.btn_berikan_tanggapan.setEnabled(True)
             self.window.btn_beli.clicked.connect(
-                self.toton_course
+                self.tonton_course
             )
         else:
             self.window.btn_beli.setText("Beli Course")
@@ -81,14 +81,18 @@ class ViewDetailCourse(AppDisplay):
             lambda _: DisplayManager.ins().show("list_course")
         )
 
-    def toton_course(self):
+    def tonton_course(self):
         '''
         Give course link video to customer
         '''
+        subprocess.check_call(
+            "echo "+self.course_data.link_video.strip()+"|clip",
+            shell=True)
         DisplayManager.ins()\
             .show_success("Menonton Course",
-                "Membuka " + self.course_data.link_video)
-        os.system("start " + self.course_data.link_video)
+                "Link course: " +
+                self.course_data.link_video +
+                "\nLink telah dicopy ke clipboard")
 
     def show_tanggapan(self, tanggapan):
         '''
@@ -102,8 +106,6 @@ class ViewDetailCourse(AppDisplay):
             setGeometry(QtCore.QRect(60, 80, 737, 93))
         getattr(self, f"tanggapan_{self.i}").\
             setMinimumSize(QtCore.QSize(0, 93))
-        getattr(self, f"tanggapan_{self.i}").\
-            setMaximumSize(QtCore.QSize(16777215, 93))
         getattr(self, f"tanggapan_{self.i}").\
             setStyleSheet("QGroupBox {\n"
                           "    border : 1px solid black;\n"
@@ -121,8 +123,6 @@ class ViewDetailCourse(AppDisplay):
         setattr(self, f"frame_{self.i}",
                 QtWidgets.QFrame(getattr(self.window, f"tanggapan_{self.i}")))
         getattr(self, f"frame_{self.i}").\
-            setMaximumSize(QtCore.QSize(16777215, 74))
-        getattr(self, f"frame_{self.i}").\
             setObjectName(f"frame_{self.i}")
 
         setattr(self, f"vL_{self.i}",
@@ -134,6 +134,8 @@ class ViewDetailCourse(AppDisplay):
                 QtWidgets.QLabel(getattr(self, f"frame_{self.i}")))
         getattr(self, f"label_nama_penanggap_{self.i}").\
             setMinimumSize(QtCore.QSize(0, 21))
+        getattr(self, f"label_nama_penanggap_{self.i}").\
+            setMaximumSize(QtCore.QSize(16777215, 21))
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
